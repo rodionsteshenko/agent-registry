@@ -1,6 +1,5 @@
 """
-AgentBeacon - Agent Registry Service
-A simple DNS-like directory for AI agents.
+Agent Registry - A DNS-like directory for AI agents.
 """
 
 import sqlite3
@@ -18,9 +17,9 @@ from pydantic import BaseModel
 # ─────────────────────────────────────────────
 
 app = FastAPI(
-    title="AgentBeacon",
+    title="Agent Registry",
     description="""
-## Agent Registry Service
+## Agent Registry
 
 A lightweight DNS-like directory for AI agents.
 
@@ -39,7 +38,7 @@ Each agent gets a card at `/.well-known/agent/{id}` following the Agent2Agent st
     version="0.1.0",
 )
 
-DB_PATH = "agentbeacon.db"
+DB_PATH = "agent-registry.db"
 
 # ─────────────────────────────────────────────
 # Database
@@ -126,7 +125,7 @@ def root():
 
 @app.get("/health", tags=["System"], summary="Health check")
 def health():
-    return {"status": "ok", "service": "agentbeacon", "version": "0.1.0"}
+    return {"status": "ok", "service": "agent-registry", "version": "0.1.0"}
 
 # ── Agent Card (A2A standard) ─────────────────
 
@@ -156,16 +155,16 @@ def agent_card(agent_id: str):
         "registered_at": d["registered_at"],
     }
 
-@app.get("/.well-known/agent-card.json", tags=["Agent Cards"], summary="Agent card for AgentBeacon itself")
+@app.get("/.well-known/agent-card.json", tags=["Agent Cards"], summary="Agent card for Agent Registry itself")
 def registry_agent_card():
     """
-    AgentBeacon's own agent card — describes the registry as an agent.
+    Agent Registry's own agent card — describes the registry as an agent.
     """
     return {
         "schema_version": "0.3",
-        "name": "AgentBeacon Registry",
+        "name": "Agent Registry",
         "description": "A DNS-like directory for AI agents. Register, discover, and reach other agents.",
-        "url": "http://localhost:8765",
+        "url": "http://localhost:8080",
         "capabilities": {
             "skills": [
                 {"id": "agent-discovery", "name": "Discover agents by capability or keyword"},

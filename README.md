@@ -1,4 +1,4 @@
-# AgentBeacon
+# Agent Registry
 
 A lightweight, DNS-like registry for AI agents.
 
@@ -131,5 +131,5 @@ pip install -r requirements.txt
 uvicorn main:app --host 0.0.0.0 --port 8080
 
 # With a process manager
-nohup uvicorn main:app --host 0.0.0.0 --port 8080 > agentbeacon.log 2>&1 &
+nohup uvicorn main:app --host 0.0.0.0 --port 8080 > agent-registry.log 2>&1 &
 ```
